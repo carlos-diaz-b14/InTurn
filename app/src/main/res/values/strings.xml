@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">inTurn</string>
+    <string name="last_name">Last name</string>
+    <string name="persons"># persons</string>
+    <string name="first_name">First name</string>
+    <string name="waiting_list">Waiting List</string>
+    <string name="robson_st_downtown">Robson St. Downtown</string>
+    <string name="time">TIME</string>
+    <string name="date">DATE</string>
+    <string name="get_a_table">GET A TABLE</string>
+    <string name="todo">TODO</string>
+    <string name="give_us_an_email_to_notify_you_15_min_before_your_table_is_ready">GIVE US AN EMAIL TO NOTIFY YOU 15 MIN BEFORE YOUR TABLE IS READY</string>
+    <string name="get_table">get table</string>
+    <string name="email">email</string>
+    <string name="todo1">TODO1</string>
+</resources>
