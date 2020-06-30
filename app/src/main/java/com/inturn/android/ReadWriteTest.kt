@@ -1,6 +1,7 @@
 package com.inturn.android
 
 import android.util.Log
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.ValueEventListener
@@ -13,10 +14,13 @@ fun basicReadWrite() {
     // Write a message to the database
     val database = Firebase.database
     /**this path just for test now*/
-    val myRef = database.getReference("restaurant/asdfjklqweruio")
-    val restaurant = Restaurant("1234 Richardson St, Vancouver",null,"Saku")
+    val myRef = database.getReference("restaurant")
 
-    myRef.setValue(restaurant)
+    val restaurant = Restaurant("1234 Richardson St, Vancouver",null,"Saku")
+    val key = myRef.push().key.toString()
+    myRef.child(key).setValue(restaurant)
+
+//    myRef.setValue(restaurant)
     // [START read_message]
     // Read from the database
     myRef.addValueEventListener(object : ValueEventListener {
