@@ -2,13 +2,9 @@ package com.inturn.android
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
-import com.google.firebase.database.DataSnapshot
-import com.google.firebase.database.DatabaseError
-import com.google.firebase.database.ValueEventListener
-import com.google.firebase.database.ktx.database
-import com.google.firebase.database.ktx.getValue
-import com.google.firebase.ktx.Firebase
+import com.inturn.android.Model.Restaurant
+import com.inturn.android.Services.basicReadWrite
+import com.inturn.android.Services.getAllRestaurant
 
 class MainActivity : AppCompatActivity() {
 
@@ -16,14 +12,20 @@ class MainActivity : AppCompatActivity() {
         const val TAG = "KotlinActivity"
     }
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        basicReadWrite()
-
-
+        getAllRestaurant({success(it)}, {fail{it}})
     }
 
+    fun success(restaurant : List<Restaurant>?) {
+        print(restaurant)
+    }
+
+    fun fail(error : Any?){
+
+    }
 
 }
