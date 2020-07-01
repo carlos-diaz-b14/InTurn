@@ -30,7 +30,7 @@ fun postData(path : String, data : Any, postSuccessFunction:(getData:DataSnapsho
 
     myRef.addValueEventListener(object : ValueEventListener {
         override fun onDataChange(dataSnapshot: DataSnapshot) {
-            postSuccessFunction(dataSnapshot)
+            postSuccessFunction(dataSnapshot.child(key))
         }
 
         override fun onCancelled(error: DatabaseError) {
