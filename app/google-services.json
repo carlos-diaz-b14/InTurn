@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "311801550546",
+    "firebase_url": "https://inturn-72726.firebaseio.com",
+    "project_id": "inturn-72726",
+    "storage_bucket": "inturn-72726.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:311801550546:android:6a96979557cb7ab2a6bf0b",
+        "android_client_info": {
+          "package_name": "com.inturn.android"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "311801550546-2i59eo2s9np0t50jvb1ah1277ruoq97i.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDdCc97E_pX2FqQ88diaMVJromKMJHS7JQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "311801550546-2i59eo2s9np0t50jvb1ah1277ruoq97i.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
