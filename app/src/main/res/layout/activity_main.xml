@@ -1,18 +1,196 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#FFFFFF"
     tools:context=".MainActivity">
 
+    <LinearLayout
+        android:id="@+id/restaurantheader"
+        android:layout_width="0dp"
+        android:layout_height="80dp"
+        android:background="#E6E6E6"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toStartOf="@+id/inturnheader"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/restaurant_logo"
+            android:layout_width="125dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="16dp"
+            android:contentDescription="@string/todo"
+            app:srcCompat="@drawable/logosaku" />
+
+        <TextView
+            android:id="@+id/restaurant_address"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/robson_st_downtown" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/infosubtitles"
+        android:layout_width="0dp"
+        android:layout_height="61dp"
+        android:background="@color/colorPrimaryDark"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="@+id/restaurantheader"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="@+id/restaurantheader"
+        app:layout_constraintTop_toBottomOf="@+id/restaurantheader">
+
+        <TextView
+            android:id="@+id/waitinglist_title"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="#9A9A9A"
+            android:paddingStart="190dp"
+            android:paddingEnd="100dp"
+            android:text="@string/waiting_list"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large"
+            android:textColor="#FFFFFF" />
+    </LinearLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/waitinglist"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/infosubtitles"
+        app:layout_constraintStart_toStartOf="@+id/infosubtitles"
+        app:layout_constraintTop_toBottomOf="@+id/infosubtitles" />
+
+    <LinearLayout
+        android:id="@+id/inturnheader"
+        android:layout_width="0dp"
+        android:layout_height="80dp"
+        android:background="#FF9800"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/restaurantheader"
+        app:layout_constraintTop_toTopOf="@+id/restaurantheader">
+
+        <ImageView
+            android:id="@+id/logotype"
+            android:layout_width="127dp"
+            android:layout_height="81dp"
+            android:contentDescription="@string/todo"
+            app:srcCompat="@drawable/logo"
+            tools:srcCompat="@drawable/logo" />
+
+        <TextView
+            android:id="@+id/gettable_title"
+            android:layout_width="220dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:fontFamily="sans-serif"
+            android:paddingTop="20dp"
+            android:text="@string/get_a_table"
+            android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+            android:textColor="#FFFFFF" />
+
+        <TextView
+            android:id="@+id/DATE"
+            android:layout_width="wrap_content"
+            android:layout_height="43dp"
+            android:layout_weight="1"
+            android:text="@string/date" />
+
+        <TextView
+            android:id="@+id/TIME"
+            android:layout_width="wrap_content"
+            android:layout_height="48dp"
+            android:layout_marginBottom="20dp"
+            android:layout_weight="1"
+            android:text="@string/time" />
+    </LinearLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/txtInputFirstName"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="35dp"
+        android:layout_marginEnd="8dp"
+        app:layout_constraintEnd_toStartOf="@+id/txtInputLastName"
+        app:layout_constraintStart_toStartOf="@+id/inturnheader"
+        app:layout_constraintTop_toBottomOf="@+id/inturnheader">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/first_name" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/txtInputLastName"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        app:layout_constraintEnd_toStartOf="@id/txtInputPplNum"
+        app:layout_constraintStart_toEndOf="@+id/txtInputFirstName"
+        app:layout_constraintTop_toTopOf="@+id/txtInputFirstName">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/last_name" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/txtInputPplNum"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        app:layout_constraintEnd_toEndOf="@+id/inturnheader"
+        app:layout_constraintStart_toEndOf="@+id/txtInputLastName"
+        app:layout_constraintTop_toTopOf="@+id/txtInputLastName">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/persons" />
+    </com.google.android.material.textfield.TextInputLayout>
+
     <TextView
+        android:id="@+id/text_email"
+        android:layout_width="257dp"
+        android:layout_height="49dp"
+        android:layout_marginTop="25dp"
+        android:text="@string/give_us_an_email_to_notify_you_15_min_before_your_table_is_ready"
+        app:layout_constraintStart_toStartOf="@+id/txtInputFirstName"
+        app:layout_constraintTop_toBottomOf="@+id/txtInputFirstName" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/email_txtinput"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Hello World!"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_marginTop="16dp"
+        app:layout_constraintStart_toStartOf="@id/text_email"
+        app:layout_constraintTop_toBottomOf="@+id/text_email">
 
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="126dp"
+            android:layout_height="wrap_content"
+            android:hint="@string/email" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <Button
+        android:id="@+id/get_table"
+        android:layout_width="215dp"
+        android:layout_height="49dp"
+        android:layout_marginTop="35dp"
+        android:background="#800080"
+        android:text="@string/get_table"
+        android:textColor="#FFFFFF"
+        app:layout_constraintEnd_toEndOf="@+id/inturnheader"
+        app:layout_constraintStart_toEndOf="@+id/restaurantheader"
+        app:layout_constraintTop_toBottomOf="@+id/email_txtinput" />
 </androidx.constraintlayout.widget.ConstraintLayout>
