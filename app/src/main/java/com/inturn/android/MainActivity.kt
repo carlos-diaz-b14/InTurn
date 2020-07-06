@@ -10,10 +10,13 @@ import com.inturn.android.Model.Restaurant
 import com.inturn.android.Model.WaitingData
 import com.inturn.android.Model.getRestaurant
 import com.inturn.android.Services.*
+import com.inturn.android.widgets.CircleTimer
 import java.time.LocalDateTime
 import java.time.ZoneId
 
 class MainActivity : AppCompatActivity() {
+    lateinit var mTimer: CircleTimer
+
     companion object {
         const val TAG = "KotlinActivity"
     }
@@ -22,6 +25,11 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        /** example */
+        mTimer.findViewById<CircleTimer>(R.id.timer)
+        mTimer.setValue(600.0F)
+        mTimer.Start()
 
         /**add NewRestaurant example*/
 //        val restaurant = Restaurant(null, "Saku", "1234 Richardson St, Vancouver", mutableListOf())
