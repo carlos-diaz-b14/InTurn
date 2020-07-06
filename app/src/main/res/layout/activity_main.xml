@@ -96,20 +96,23 @@
             android:textAppearance="@style/TextAppearance.AppCompat.Display1"
             android:textColor="#FFFFFF" />
 
-        <TextView
+        <TextClock
             android:id="@+id/DATE"
             android:layout_width="wrap_content"
-            android:layout_height="43dp"
+            android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="@string/date" />
+            android:format12Hour="MMM dd"
+            android:format24Hour="MMM dd"
+            android:textColor="#FFFFFF"/>
 
-        <TextView
+        <TextClock
             android:id="@+id/TIME"
             android:layout_width="wrap_content"
-            android:layout_height="48dp"
-            android:layout_marginBottom="20dp"
+            android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="@string/time" />
+            android:format12Hour="hh:mm"
+            android:format24Hour="HH:mm"
+            android:textColor="#FFFFFF"/>
     </LinearLayout>
 
     <com.google.android.material.textfield.TextInputLayout
