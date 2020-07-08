@@ -27,7 +27,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         /** example */
-        mTimer.findViewById<CircleTimer>(R.id.timer)
+        mTimer = findViewById(R.id.timer)
         mTimer.setValue(600.0F)
         mTimer.Start()
 
