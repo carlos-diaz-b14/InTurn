@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/viewGroup"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="10dp">
+
+    <TextView
+        android:id="@+id/checkTimeTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="checkTime"/>
+
+    <TextView
+        android:id="@+id/expectedTimeTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="expectedTime" />
+
+    <TextView
+        android:id="@+id/statusTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="status" />
+
+    <TextView
+        android:id="@+id/customerTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="customer" />
+
+    <TextView
+        android:id="@+id/peopleTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="people" />
+</LinearLayout>
