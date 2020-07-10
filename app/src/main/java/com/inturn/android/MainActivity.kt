@@ -4,11 +4,14 @@ import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.annotation.RequiresApi
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.inturn.android.Enum.WaitingStatus
 import com.inturn.android.Model.Customer
 import com.inturn.android.Model.Restaurant
 import com.inturn.android.Model.WaitingData
 import com.inturn.android.Model.getRestaurant
+import com.inturn.android.RecyclerView.WaitingListAdapter
 import com.inturn.android.Services.*
 import com.inturn.android.widgets.CircleTimer
 import java.time.LocalDateTime
@@ -21,10 +24,17 @@ class MainActivity : AppCompatActivity() {
         const val TAG = "KotlinActivity"
     }
 
+    private lateinit var mRecyclerView: RecyclerView
+
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        mRecyclerView = findViewById(R.id.waitinglist)
+        val adapter = WaitingListAdapter(ArrayList()) /**empty data source*/
+        mRecyclerView.adapter = adapter
+        mRecyclerView.layoutManager = LinearLayoutManager(parent)
 
         /** example */
         mTimer = findViewById(R.id.timer)
