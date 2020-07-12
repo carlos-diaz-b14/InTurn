@@ -1,38 +1,57 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/viewGroup"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical"
-    android:padding="10dp">
+    android:orientation="horizontal">
 
     <TextView
+        style="@style/textviewStyle"
+        android:id="@+id/firstNameTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Aaron"/>
+
+    <TextView
+        style="@style/textviewStyle"
+        android:id="@+id/lastNameTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Chen"/>
+
+    <TextView
+        style="@style/textviewStyle"
         android:id="@+id/checkTimeTextView"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="checkTime"/>
 
     <TextView
+        style="@style/textviewStyle"
         android:id="@+id/expectedTimeTextView"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="expectedTime" />
 
     <TextView
+        style="@style/textviewStyle"
         android:id="@+id/statusTextView"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="status" />
 
     <TextView
+        style="@style/textviewStyle"
         android:id="@+id/customerTextView"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="customer" />
 
     <TextView
+        style="@style/textviewStyle"
         android:id="@+id/peopleTextView"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="people" />
 </LinearLayout>
