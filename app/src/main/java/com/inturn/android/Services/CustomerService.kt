@@ -39,13 +39,14 @@ fun postCustomerService(customerData: Customer, success:(customer : Customer)->U
                 {
                     customer = it.getValue(Customer::class.java)!!
                     customer?.id = it.key
+                    success(customer!!)
                 },
 
                 {
                     error(error)
                 })
         }
-        success(customer!!)
+
     },{
         error(error)
     })
