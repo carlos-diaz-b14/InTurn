@@ -6,6 +6,7 @@ import androidx.annotation.RequiresApi
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.google.firebase.database.DataSnapshot
 import com.inturn.android.Enum.WaitingStatus
 import com.inturn.android.Model.Customer
 import com.inturn.android.Model.WaitingData
@@ -63,19 +64,20 @@ class MainViewModel : ViewModel() {
     @RequiresApi(Build.VERSION_CODES.O)
     fun createCustomer(){
         val userdata = Customer(firstName = firstName.value, lastName = lastName.value, email = email.value)
-        postCustomerService(userdata ,{ createWaitlist(it) }, {})
+        postCustomerService(userdata , ::createWaitlist, {})
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
-    fun createWaitlist(userdata : Customer){
+    fun createWaitlist(userdata : DataSnapshot){
+
         val waitingData = WaitingData(null, Date.from(LocalDateTime.now().atZone(ZoneId.systemDefault()).toInstant()), Date.from(LocalDateTime.now().atZone(ZoneId.systemDefault()).toInstant())
-        , WaitingStatus.wating, userdata, people.value?.toInt())
+        , WaitingStatus.wating, userdata.getValue(Customer::class.java)!!, people.value?.toInt())
 
         /**fix restaurantId just test for now*/
-        addQueueInRestaurant("-MBAe66mDPPlynlus4-e", waitingData, {getTableSuccess(it)}, {})
+        addQueueInRestaurant("-MBAe66mDPPlynlus4-e", waitingData, ::getTableSuccess, {})
     }
 
-    fun getTableSuccess(restaurant: WaitingData){
+    fun getTableSuccess(restaurant: DataSnapshot){
 //        _isgetTableBtnEnable.value = false
         _firstName.value = ""
         _lastName.value = ""
@@ -83,6 +85,6 @@ class MainViewModel : ViewModel() {
         _people.value = ""
 
         /**Here had set observe so when _getTableData.value change will do add to recycleView*/
-        _getTableData.value = restaurant
+        _getTableData.value = restaurant.getValue(WaitingData::class.java)!!
     }
 }

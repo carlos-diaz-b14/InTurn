@@ -10,7 +10,7 @@ fun getData(path: String, getSuccessFunction:(getData:DataSnapshot)->Unit, getEr
     val database = Firebase.database
     val myRef = database.getReference(path)
 
-    myRef.addValueEventListener(object : ValueEventListener {
+    myRef.addListenerForSingleValueEvent(object : ValueEventListener {
         override fun onDataChange(dataSnapshot: DataSnapshot) {
             getSuccessFunction(dataSnapshot)
         }
@@ -28,7 +28,7 @@ fun postData(path : String, data : Any, postSuccessFunction:(getData:DataSnapsho
     val key = myRef.push().key.toString()
     myRef.child(key).setValue(data)
 
-    myRef.addValueEventListener(object : ValueEventListener {
+    myRef.addListenerForSingleValueEvent(object : ValueEventListener {
         override fun onDataChange(dataSnapshot: DataSnapshot) {
             postSuccessFunction(dataSnapshot.child(key))
         }
@@ -44,7 +44,7 @@ fun updateData(path : String, data : Any, updateSuccessFunction:(getData:DataSna
     val myRef = database.getReference(path)
     myRef.setValue(data)
 
-    myRef.addValueEventListener(object : ValueEventListener {
+    myRef.addListenerForSingleValueEvent(object : ValueEventListener {
         override fun onDataChange(dataSnapshot: DataSnapshot) {
             updateSuccessFunction(dataSnapshot)
         }

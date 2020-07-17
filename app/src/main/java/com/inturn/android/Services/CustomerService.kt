@@ -1,34 +1,37 @@
 package com.inturn.android.Services
 
+import com.google.firebase.database.DataSnapshot
 import com.inturn.android.Model.Customer
 
-fun getCustomerByEmailService(email:String, success:(customer : Customer?)->Unit, error:(error:Any?)->Unit){
-    getData("customer",{
-        val restaurants: MutableList<Customer> = mutableListOf()
-        var customer : Customer? = null
-        it.children.forEach{
-            if (it.child("email").getValue(String::class.java).equals(email)) {
-                customer = it.getValue(Customer::class.java)!!
-                customer?.id = it.key
-                return@forEach
-            }
-        }
+fun getCustomerByEmailService(email:String, success:(customer : DataSnapshot)->Unit, error:(error:Any?)->Unit){
+    getData("customer", success, error)
 
-        /**if that customer data not exist here will pass null*/
-        success(customer)
-    },{
-        error(error)
-    })
+//    getData("customer",{
+//        val restaurants: MutableList<Customer> = mutableListOf()
+//        var customer : Customer? = null
+//        it.children.forEach{
+//            if (it.child("email").getValue(String::class.java).equals(email)) {
+//                customer = it.getValue(Customer::class.java)!!
+//                customer?.id = it.key
+//                return@forEach
+//            }
+//        }
+//
+//        /**if that customer data not exist here will pass null*/
+//        success(customer)
+//    },{
+//        error(error)
+//    })
 }
 
-fun postCustomerService(customerData: Customer, success:(customer : Customer)->Unit, error:(error:Any?)->Unit){
+fun postCustomerService(customerData: Customer, success:(customer : DataSnapshot)->Unit, error:(error:Any?)->Unit){
+    /**try to get first if is null post if not return that customer data*/
     getData("customer",{
         val restaurants: MutableList<Customer> = mutableListOf()
-        var customer : Customer? = null
+        var customer : DataSnapshot? = null
         it.children.forEach{
             if (it.child("email").getValue(String::class.java).equals(customerData.email)) {
-                customer = it.getValue(Customer::class.java)!!
-                customer?.id = it.key
+                customer = it
                 return@forEach
             }
         }
@@ -36,18 +39,13 @@ fun postCustomerService(customerData: Customer, success:(customer : Customer)->U
         /**if already exist don't post*/
         if(customer == null){
             postData("customer", customerData,
-                {
-                    customer = it.getValue(Customer::class.java)!!
-                    customer?.id = it.key
-                    success(customer!!)
-                },
-
+                success,
                 {
                     error(error)
                 })
+        }else{
+            success(customer!!)
         }
 
-    },{
-        error(error)
-    })
+    }, error)
 }
