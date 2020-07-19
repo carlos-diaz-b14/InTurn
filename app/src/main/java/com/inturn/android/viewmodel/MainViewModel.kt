@@ -58,13 +58,15 @@ class MainViewModel : ViewModel() {
 
     @RequiresApi(Build.VERSION_CODES.O)
     fun onGetTable() {
-        createCustomer()
+        if (isAllow()) {
+            createCustomer()
+        }
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
     fun createCustomer(){
         val userdata = Customer(firstName = firstName.value, lastName = lastName.value, email = email.value)
-        postCustomerService(userdata , ::createWaitlist, {})
+        postCustomerService(userdata , ::createWaitlist, ::error)
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
@@ -74,7 +76,7 @@ class MainViewModel : ViewModel() {
         , WaitingStatus.wating, userdata.getValue(Customer::class.java)!!, people.value?.toInt())
 
         /**fix restaurantId just test for now*/
-        addQueueInRestaurant("-MBAe66mDPPlynlus4-e", waitingData, ::getTableSuccess, {})
+        addQueueInRestaurant("-MBAe66mDPPlynlus4-e", waitingData, ::getTableSuccess, ::error)
     }
 
     fun getTableSuccess(restaurant: DataSnapshot){
@@ -86,5 +88,16 @@ class MainViewModel : ViewModel() {
 
         /**Here had set observe so when _getTableData.value change will do add to recycleView*/
         _getTableData.value = restaurant.getValue(WaitingData::class.java)!!
+    }
+
+    fun isAllow() : Boolean {
+        //TODO: must have people value
+        //TODO: must have legal email
+        //TODO: must have first name or last name
+        return true
+    }
+
+    fun error(errormessage : Any?){
+
     }
 }

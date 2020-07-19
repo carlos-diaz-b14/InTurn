@@ -17,7 +17,11 @@ import com.inturn.android.viewmodel.MainViewModel
 import com.inturn.android.databinding.ActivityMainBinding
 import com.inturn.android.widgets.CircleTimer
 import androidx.lifecycle.ViewModelProviders
+import com.google.firebase.database.DataSnapshot
 import com.inturn.android.Model.WaitingData
+import com.inturn.android.Model.getRestaurant
+import com.inturn.android.Services.getRestaurant
+import com.inturn.android.Services.updateWaitingDataWaitingStatus
 
 class MainActivity : AppCompatActivity() {
     lateinit var mTimer: CircleTimer
@@ -59,6 +63,7 @@ class MainActivity : AppCompatActivity() {
         binding.mainViewModel = viewModel
         binding.setLifecycleOwner(this)
 
+        getRestaurant("-MBAe66mDPPlynlus4-e", ::success, ::fail)
         /**add NewRestaurant example*/
 //        val restaurant = Restaurant(null, "Saku", "1234 Richardson St, Vancouver", mutableListOf())
 //        addNewRestaurant(restaurant,{},{})
@@ -81,13 +86,16 @@ class MainActivity : AppCompatActivity() {
     }
 
     /**when success call this function*/
-//    fun success(cdata:List<getRestaurant>?) {
-//        print(cdata)
-//    }
+    fun success(cdata: DataSnapshot) {
+        cdata.child("wating").children.forEach{
+            mContactList.add(it.getValue(WaitingData::class.java)!!)
+        }
+        mRecyclerView.adapter?.notifyDataSetChanged()
+    }
 
     /**when fail call this function*/
-//    fun fail(error : Any?){
-//
-//    }
+    fun fail(error : Any?){
+
+    }
 
 }
