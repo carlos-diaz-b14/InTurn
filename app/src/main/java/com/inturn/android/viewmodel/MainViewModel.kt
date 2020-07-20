@@ -1,16 +1,16 @@
 package com.inturn.android.viewmodel
 
 import android.os.Build
-import android.view.View
 import androidx.annotation.RequiresApi
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.google.firebase.database.DataSnapshot
 import com.inturn.android.Enum.WaitingStatus
-import com.inturn.android.Model.Customer
-import com.inturn.android.Model.WaitingData
+import com.inturn.android.model.Customer
+import com.inturn.android.model.WaitingData
 import com.inturn.android.Services.addQueueInRestaurant
+import com.inturn.android.Services.getRestaurant
 import com.inturn.android.Services.postCustomerService
 import java.time.LocalDateTime
 import java.time.ZoneId
@@ -49,11 +49,17 @@ class MainViewModel : ViewModel() {
     val isgetTableBtnEnable: LiveData<Boolean>
         get() = _isgetTableBtnEnable
 
+    private val _waitingDatas = MutableLiveData<ArrayList<WaitingData>>()
+    val waitingDatas :MutableLiveData<ArrayList<WaitingData>>
+        get() = _waitingDatas
+
     init {
         _isgetTableBtnEnable.value = true
         _firstName.value = ""
         _lastName.value = ""
         _email.value = ""
+        _waitingDatas.value = arrayListOf()
+        getRestaurant("-MBAe66mDPPlynlus4-e", ::success, ::error)
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
@@ -87,7 +93,9 @@ class MainViewModel : ViewModel() {
         _people.value = ""
 
         /**Here had set observe so when _getTableData.value change will do add to recycleView*/
-        _getTableData.value = restaurant.getValue(WaitingData::class.java)!!
+//        _getTableData.value = restaurant.getValue(WaitingData::class.java)!!
+        _waitingDatas.value?.add(restaurant.getValue(WaitingData::class.java)!!)
+        _waitingDatas.value = _waitingDatas.value
     }
 
     fun isAllow() : Boolean {
@@ -99,5 +107,13 @@ class MainViewModel : ViewModel() {
 
     fun error(errormessage : Any?){
 
+    }
+
+    /**when success call this function*/
+    fun success(cdata: DataSnapshot) {
+        cdata.child("wating").children.forEach{
+            _waitingDatas.value?.add(it.getValue(WaitingData::class.java)!!)
+        }
+        _waitingDatas.value = _waitingDatas.value
     }
 }

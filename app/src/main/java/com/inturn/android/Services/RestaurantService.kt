@@ -2,9 +2,8 @@ package com.inturn.android.Services
 
 import com.google.firebase.database.DataSnapshot
 import com.inturn.android.Enum.WaitingStatus
-import com.inturn.android.Model.Restaurant
-import com.inturn.android.Model.WaitingData
-import com.inturn.android.Model.getRestaurant
+import com.inturn.android.model.Restaurant
+import com.inturn.android.model.WaitingData
 
 fun getRestaurant(restaurantId:String, success:(restaurant: DataSnapshot)->Unit, error:(error:Any?)->Unit){
     getData("restaurant/" + restaurantId, success, error)

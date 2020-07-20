@@ -1,11 +1,8 @@
 package com.inturn.android
 
-import android.app.PendingIntent.getActivity
-import android.content.Context
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.inputmethod.InputMethodManager
 import androidx.annotation.RequiresApi
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
@@ -17,11 +14,8 @@ import com.inturn.android.viewmodel.MainViewModel
 import com.inturn.android.databinding.ActivityMainBinding
 import com.inturn.android.widgets.CircleTimer
 import androidx.lifecycle.ViewModelProviders
-import com.google.firebase.database.DataSnapshot
-import com.inturn.android.Model.WaitingData
-import com.inturn.android.Model.getRestaurant
-import com.inturn.android.Services.getRestaurant
-import com.inturn.android.Services.updateWaitingDataWaitingStatus
+import com.inturn.android.model.WaitingData
+import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
     lateinit var mTimer: CircleTimer
@@ -42,18 +36,28 @@ class MainActivity : AppCompatActivity() {
         viewModel = ViewModelProviders.of(this, viewModelFactory).get(MainViewModel::class.java)
 
         mRecyclerView = findViewById(R.id.waitinglist)
-        val adapter = WaitingListAdapter(mContactList)
 
-        viewModel.getTableData.observe(this, Observer { getTable ->
-            mContactList.add(getTable)
-            adapter.notifyDataSetChanged()
+        viewModel.waitingDatas.observe(this, Observer {
+            waitinglist ->
+            mRecyclerView.also {
+                it.layoutManager = LinearLayoutManager(this)
+                it.setHasFixedSize(true)
+                it.adapter = WaitingListAdapter(waitinglist)
+            }
         })
+
+//        val adapter = WaitingListAdapter(mContactList)
+
+//        viewModel.getTableData.observe(this, Observer { getTable ->
+//            mContactList.add(getTable)
+//            adapter.notifyDataSetChanged()
+//        })
 
         super.onCreate(savedInstanceState)
 //        setContentView(R.layout.activity_main)
 
-        mRecyclerView.adapter = adapter
-        mRecyclerView.layoutManager = LinearLayoutManager(parent)
+//        mRecyclerView.adapter = adapter
+//        mRecyclerView.layoutManager = LinearLayoutManager(parent)
 
         /** example */
         mTimer = findViewById(R.id.timer)
@@ -63,7 +67,6 @@ class MainActivity : AppCompatActivity() {
         binding.mainViewModel = viewModel
         binding.setLifecycleOwner(this)
 
-        getRestaurant("-MBAe66mDPPlynlus4-e", ::success, ::fail)
         /**add NewRestaurant example*/
 //        val restaurant = Restaurant(null, "Saku", "1234 Richardson St, Vancouver", mutableListOf())
 //        addNewRestaurant(restaurant,{},{})
@@ -86,16 +89,16 @@ class MainActivity : AppCompatActivity() {
     }
 
     /**when success call this function*/
-    fun success(cdata: DataSnapshot) {
-        cdata.child("wating").children.forEach{
-            mContactList.add(it.getValue(WaitingData::class.java)!!)
-        }
-        mRecyclerView.adapter?.notifyDataSetChanged()
-    }
+//    fun success(cdata: DataSnapshot) {
+//        cdata.child("wating").children.forEach{
+//            mContactList.add(it.getValue(WaitingData::class.java)!!)
+//        }
+//        mRecyclerView.adapter?.notifyDataSetChanged()
+//    }
 
     /**when fail call this function*/
-    fun fail(error : Any?){
-
-    }
+//    fun fail(error : Any?){
+//
+//    }
 
 }

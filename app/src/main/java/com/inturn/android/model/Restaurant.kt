@@ -1,6 +1,4 @@
-package com.inturn.android.Model
-
-import com.google.firebase.database.DataSnapshot
+package com.inturn.android.model
 
 data class Restaurant(
     var id : String? = null,

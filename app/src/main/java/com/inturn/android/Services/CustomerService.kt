@@ -1,7 +1,7 @@
 package com.inturn.android.Services
 
 import com.google.firebase.database.DataSnapshot
-import com.inturn.android.Model.Customer
+import com.inturn.android.model.Customer
 
 fun getCustomerByEmailService(email:String, success:(customer : DataSnapshot)->Unit, error:(error:Any?)->Unit){
     getData("customer", success, error)
