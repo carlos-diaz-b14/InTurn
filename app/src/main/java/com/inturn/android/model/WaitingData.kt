@@ -1,4 +1,4 @@
-package com.inturn.android.Model
+package com.inturn.android.model
 
 import com.inturn.android.Enum.WaitingStatus
 import java.util.*

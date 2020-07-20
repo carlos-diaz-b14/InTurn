@@ -1,7 +1,6 @@
-package com.inturn.android.Model
+package com.inturn.android.model
 
 import com.inturn.android.Enum.CustomerStatus
-import java.util.*
 
 data class Customer(
     var id : String? = null,
