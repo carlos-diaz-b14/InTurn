@@ -1,4 +1,4 @@
-package com.inturn.android.Factory
+package com.inturn.android.factory
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider

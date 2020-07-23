@@ -1,6 +1,6 @@
 package com.inturn.android.model
 
-import com.inturn.android.Enum.WaitingStatus
+import com.inturn.android.enums.WaitingStatus
 import java.util.*
 
 data class WaitingData(
@@ -11,5 +11,6 @@ data class WaitingData(
     var expectedTime : Date? = null,
     var status : WaitingStatus = WaitingStatus.wating,
     var customer : Customer? = null,
-    var people : Int? = null
+    var people : Int? = null,
+    var isWating : Boolean = status == WaitingStatus.wating
 )

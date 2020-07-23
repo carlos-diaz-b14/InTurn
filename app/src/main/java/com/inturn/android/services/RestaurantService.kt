@@ -1,7 +1,7 @@
-package com.inturn.android.Services
+package com.inturn.android.services
 
 import com.google.firebase.database.DataSnapshot
-import com.inturn.android.Enum.WaitingStatus
+import com.inturn.android.enums.WaitingStatus
 import com.inturn.android.model.Restaurant
 import com.inturn.android.model.WaitingData
 

@@ -1,4 +1,4 @@
-package com.inturn.android.Services
+package com.inturn.android.services
 
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
