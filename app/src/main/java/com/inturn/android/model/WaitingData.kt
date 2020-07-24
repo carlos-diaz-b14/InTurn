@@ -11,6 +11,9 @@ data class WaitingData(
     var expectedTime : Date? = null,
     var status : WaitingStatus = WaitingStatus.wating,
     var customer : Customer? = null,
-    var people : Int? = null,
-    var isWating : Boolean = status == WaitingStatus.wating
-)
+    var people : Int? = null
+
+){
+    val isWating : Boolean
+        get() = this.status == WaitingStatus.wating
+}

@@ -67,9 +67,13 @@ fun addNewRestaurant(restaurant: Restaurant, success: (restaurant: DataSnapshot)
 //    )
 }
 
-fun updateWaitingDataWaitingStatus(restaurantId: String, waitingDataId :String, status:WaitingStatus, success: (restaurant: DataSnapshot) -> Unit, error:(error:Any?) -> Unit){
+fun updateWaitingDataWaitingStatus(restaurantId: String, waitingDataId :String, status:WaitingStatus, success: (restaurant: DataSnapshot, waitingDataId:String) -> Unit, error:(error:Any?) -> Unit){
 
-    updateData("restaurant/" + restaurantId + "/wating/" + waitingDataId + "/status", status, success, error)
+    var finish:((restaurant: DataSnapshot)->Unit)={
+        success(it, waitingDataId)
+    }
+
+    updateData("restaurant/" + restaurantId + "/wating/" + waitingDataId + "/status", status, finish, error)
 
 //    updateData("restaurant/" + restaurantId + "/wating/" + waitingDataId + "/status", status,
 //        {

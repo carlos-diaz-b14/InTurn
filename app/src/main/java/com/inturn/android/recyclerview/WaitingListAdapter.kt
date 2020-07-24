@@ -29,32 +29,29 @@ class WaitingListAdapter(private val waitingList: ArrayList<WaitingData>): Recyc
     override fun onBindViewHolder(holder: WaitingDataViewHolder, position: Int) {
         holder.recyclerviewWaitingData.waitingdata = waitingList[position]
         holder.recyclerviewWaitingData.checkButton.setOnClickListener {
-
             ///TODO Here should show a password dialog
             ///TODO After login function finish should use different restaurantId
-//            updateWaitingDataWaitingStatus("-MBAe66mDPPlynlus4-e", waitingList[position].id!!, WaitingStatus.checked, ::success, ::error)
+            updateWaitingDataWaitingStatus("-MBAe66mDPPlynlus4-e", waitingList[position].id!!, WaitingStatus.checked, ::success, ::error)
         }
 
         holder.recyclerviewWaitingData.cancelButton.setOnClickListener {
             ///TODO Here should show a password dialog
             ///TODO After login function finish should use different restaurantId
-//            updateWaitingDataWaitingStatus("-MBAe66mDPPlynlus4-e", waitingList[position].id!!, WaitingStatus.cancle, ::success, ::error)
+            updateWaitingDataWaitingStatus("-MBAe66mDPPlynlus4-e", waitingList[position].id!!, WaitingStatus.cancle, ::success, ::error)
         }
     }
 
     inner class WaitingDataViewHolder(val recyclerviewWaitingData: LayoutRecyclerViewItemBinding): RecyclerView.ViewHolder(recyclerviewWaitingData.root)
 
     fun error(errormessage : Any?){
-        ///TODO If error happend should show error message tell user there is some thing wrong so couldn't cancel or checked 
+        ///TODO If error happend should show error message tell user there is some thing wrong so couldn't cancel or checked
+
     }
 
     /**when success call this function*/
-    fun success(cdata: DataSnapshot) {
-
-//        var watingD = cdata.getValue(WaitingData::class.java)!!
-
-//        waitingList.filter { it.id == cdata.key }[0].status = cdata.
-
+    fun success(cdata: DataSnapshot, waitingId:String) {
+        var watingD = cdata.getValue(WaitingStatus::class.java)!!
+        waitingList.find{ it.id == waitingId }?.status = watingD
         notifyDataSetChanged()
     }
 
