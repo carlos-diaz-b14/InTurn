@@ -1,6 +1,6 @@
 package com.inturn.android.model
 
-import com.inturn.android.Enum.WaitingStatus
+import com.inturn.android.enums.WaitingStatus
 import java.util.*
 
 data class WaitingData(
@@ -12,4 +12,8 @@ data class WaitingData(
     var status : WaitingStatus = WaitingStatus.wating,
     var customer : Customer? = null,
     var people : Int? = null
-)
+
+){
+    val isWating : Boolean
+        get() = this.status == WaitingStatus.wating
+}

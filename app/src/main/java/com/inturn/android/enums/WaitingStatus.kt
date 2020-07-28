@@ -1,4 +1,4 @@
-package com.inturn.android.Enum
+package com.inturn.android.enums
 
 /**Restaurant waiting status*/
 enum class WaitingStatus(val StatusCode: Int) {

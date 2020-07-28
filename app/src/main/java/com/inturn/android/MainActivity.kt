@@ -8,14 +8,13 @@ import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.inturn.android.Factory.MainViewModelFactory
-import com.inturn.android.RecyclerView.WaitingListAdapter
+import com.inturn.android.factory.MainViewModelFactory
+import com.inturn.android.recyclerview.WaitingListAdapter
 import com.inturn.android.viewmodel.MainViewModel
 import com.inturn.android.databinding.ActivityMainBinding
 import com.inturn.android.widgets.CircleTimer
 import androidx.lifecycle.ViewModelProviders
 import com.inturn.android.model.WaitingData
-import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
     lateinit var mTimer: CircleTimer

@@ -59,6 +59,7 @@
         android:background="#800080"
         android:text="@string/check"
         android:textColor="#FFFFFF"
+        android:enabled="@{waitingdata.isWating}"
          />
 
     <Button
@@ -68,7 +69,8 @@
         android:layout_height="49dp"
         android:background="#FF0000"
         android:text="@string/cancel"
-        android:textColor="#FFFFFF" />
+        android:textColor="#FFFFFF"
+        android:enabled="@{waitingdata.isWating}"/>
 
 <!--    <TextView-->
 <!--        style="@style/textviewStyle"-->

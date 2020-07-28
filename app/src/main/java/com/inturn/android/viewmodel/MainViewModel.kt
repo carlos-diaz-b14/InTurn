@@ -6,12 +6,12 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.google.firebase.database.DataSnapshot
-import com.inturn.android.Enum.WaitingStatus
+import com.inturn.android.enums.WaitingStatus
 import com.inturn.android.model.Customer
 import com.inturn.android.model.WaitingData
-import com.inturn.android.Services.addQueueInRestaurant
-import com.inturn.android.Services.getRestaurant
-import com.inturn.android.Services.postCustomerService
+import com.inturn.android.services.addQueueInRestaurant
+import com.inturn.android.services.getRestaurant
+import com.inturn.android.services.postCustomerService
 import java.time.LocalDateTime
 import java.time.ZoneId
 import java.util.*
@@ -82,6 +82,7 @@ class MainViewModel : ViewModel() {
         , WaitingStatus.wating, userdata.getValue(Customer::class.java)!!, people.value?.toInt())
 
         /**fix restaurantId just test for now*/
+        ///TODO After restaurant login function finish here should use different restaurantId for different restaurant
         addQueueInRestaurant("-MBAe66mDPPlynlus4-e", waitingData, ::getTableSuccess, ::error)
     }
 
@@ -94,7 +95,9 @@ class MainViewModel : ViewModel() {
 
         /**Here had set observe so when _getTableData.value change will do add to recycleView*/
 //        _getTableData.value = restaurant.getValue(WaitingData::class.java)!!
-        _waitingDatas.value?.add(restaurant.getValue(WaitingData::class.java)!!)
+        var watingD = restaurant.getValue(WaitingData::class.java)!!
+        watingD.id = restaurant.key
+        _waitingDatas.value?.add(watingD)
         _waitingDatas.value = _waitingDatas.value
     }
 
@@ -112,7 +115,9 @@ class MainViewModel : ViewModel() {
     /**when success call this function*/
     fun success(cdata: DataSnapshot) {
         cdata.child("wating").children.forEach{
-            _waitingDatas.value?.add(it.getValue(WaitingData::class.java)!!)
+            var watingD = it.getValue(WaitingData::class.java)!!
+            watingD.id = it.key
+            _waitingDatas.value?.add(watingD)
         }
         _waitingDatas.value = _waitingDatas.value
     }

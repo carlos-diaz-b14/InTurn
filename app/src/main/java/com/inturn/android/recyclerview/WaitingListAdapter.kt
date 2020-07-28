@@ -1,16 +1,15 @@
-package com.inturn.android.RecyclerView
+package com.inturn.android.recyclerview
 
-import android.os.Build
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
-import androidx.annotation.RequiresApi
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
+import com.google.firebase.database.DataSnapshot
 import com.inturn.android.model.WaitingData
 import com.inturn.android.R
 import com.inturn.android.databinding.LayoutRecyclerViewItemBinding
+import com.inturn.android.enums.WaitingStatus
+import com.inturn.android.services.updateWaitingDataWaitingStatus
 
 class WaitingListAdapter(private val waitingList: ArrayList<WaitingData>): RecyclerView.Adapter<WaitingListAdapter.WaitingDataViewHolder>() {
 
@@ -29,10 +28,32 @@ class WaitingListAdapter(private val waitingList: ArrayList<WaitingData>): Recyc
 
     override fun onBindViewHolder(holder: WaitingDataViewHolder, position: Int) {
         holder.recyclerviewWaitingData.waitingdata = waitingList[position]
+        holder.recyclerviewWaitingData.checkButton.setOnClickListener {
+            ///TODO Here should show a password dialog
+            ///TODO After login function finish should use different restaurantId
+            updateWaitingDataWaitingStatus("-MBAe66mDPPlynlus4-e", waitingList[position].id!!, WaitingStatus.checked, ::success, ::error)
+        }
+
+        holder.recyclerviewWaitingData.cancelButton.setOnClickListener {
+            ///TODO Here should show a password dialog
+            ///TODO After login function finish should use different restaurantId
+            updateWaitingDataWaitingStatus("-MBAe66mDPPlynlus4-e", waitingList[position].id!!, WaitingStatus.cancle, ::success, ::error)
+        }
     }
 
     inner class WaitingDataViewHolder(val recyclerviewWaitingData: LayoutRecyclerViewItemBinding): RecyclerView.ViewHolder(recyclerviewWaitingData.root)
 
+    fun error(errormessage : Any?){
+        ///TODO If error happend should show error message tell user there is some thing wrong so couldn't cancel or checked
+
+    }
+
+    /**when success call this function*/
+    fun success(cdata: DataSnapshot, waitingId:String) {
+        var watingD = cdata.getValue(WaitingStatus::class.java)!!
+        waitingList.find{ it.id == waitingId }?.status = watingD
+        notifyDataSetChanged()
+    }
 
 //    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): WLViewHolder {
 //        val itemView = LayoutInflater.from(parent.context).inflate(R.layout.layout_recycler_view_item, parent, false)
